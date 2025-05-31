@@ -2,6 +2,9 @@
 
 A powerful and flexible Go client library for the Postal email server. This library provides a simple, middleware-based approach to interact with Postal's API, making it easy to send emails with advanced features and customizations.
 
+## About postal
+Postal is a complete and fully featured mail server for use by websites & web servers. Think Sendgrid, Mailgun or Postmark but open source and ready for you to run on your own servers. Checkout postal github [here](https://github.com/postalserver/postal).
+
 ## Features
 
 - 🚀 Simple and intuitive API
