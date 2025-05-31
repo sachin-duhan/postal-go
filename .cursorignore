@@ -1,0 +1,89 @@
+# Ignore things that .gitignore possibly didn't cover. Cursor already ignores whatever .gitignore does but the below are things occasionally people don't ignore in git
+# CAUTION: this assumes there truly isn't anything in
+#/bin
+#/dist
+!bin
+
+# Since we're ignoring all json in the codebase, we'll manually allow these as it's typical the model will be working on them
+!package.json
+!package-lock.json
+!tsconfig.json
+!tsconfig.jsonc
+!jsconfig.json
+!deno.json
+!deno.jsonc
+!eslintrc.json
+!prettier.json
+
+# IMPORTANT: DO NOT REMOVE THIS
+!.cursor/memory
+
+# Build directories
+/build/
+/dist/
+/out/
+/.next/
+/.nuxt/
+/.output/
+
+# Environment variables and secrets
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+*.cert
+*.p12
+*_private*
+
+# Large files and datasets
+*.csv
+*.xls
+*.xlsx
+*.db
+*.sqlite
+*.sql
+*.parquet
+*.bin
+*.model
+*.ckpt
+*.pb
+*.h5
+*.weights
+*.pt
+*.pth
+
+# Logs and caches
+/logs/
+/.cache/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+
+# Test coverage and reports
+/coverage/
+/.nyc_output/
+/test-results/
+/cypress/screenshots/
+/cypress/videos/
+
+# Generated files
+*.min.js
+*.min.css
+*.generated.*
+
+# Documentation
+/docs/
+/documentation/
+*.md
+*.mdx
+/README.md
+
+# Personal/local config files
+.vscode/
+.idea/
+*.swp
+*.swo
