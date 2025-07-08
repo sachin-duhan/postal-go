@@ -1,8 +1,0 @@
-# https://docs.cursor.com/context/ignore-files#default-ignore-list
-
-/xnotes
-.cursor/templates/*.md
-/node_modules
-.cursor/rules/*
-.cursor/modes.json
-.cursor/mcp.json

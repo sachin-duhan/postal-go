@@ -72,14 +72,20 @@ func (t *Transport) Do(ctx context.Context, req *Request) (*types.Result, error)
 		httpReq.Header.Set(k, v)
 	}
 
-	// Apply middleware chain
-	rt := t.httpClient.Transport
+	// Apply middleware chain without modifying the client
+	client := t.httpClient
 	if len(t.middleware) > 0 {
-		rt = middleware.Chain(t.middleware...)(rt)
+		// Create a copy of the client to avoid race conditions
+		clientCopy := *t.httpClient
+		rt := t.httpClient.Transport
+		if rt == nil {
+			rt = http.DefaultTransport
+		}
+		clientCopy.Transport = middleware.Chain(t.middleware...)(rt)
+		client = &clientCopy
 	}
-	t.httpClient.Transport = rt
 
-	resp, err := t.httpClient.Do(httpReq)
+	resp, err := client.Do(httpReq)
 	if err != nil {
 		return nil, fmt.Errorf("request failed: %w", err)
 	}

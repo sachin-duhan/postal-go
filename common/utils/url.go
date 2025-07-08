@@ -21,13 +21,18 @@ func NewURLBuilder(baseURL string) (*URLBuilder, error) {
 
 // BuildPath joins the base URL with the given path
 func (b *URLBuilder) BuildPath(path string) string {
-	return fmt.Sprintf("%s/%s", b.baseURL, strings.TrimPrefix(path, "/"))
+	return fmt.Sprintf("%s/api/v1/%s", b.baseURL, strings.TrimPrefix(path, "/"))
 }
 
 // ValidateURL checks if the URL is valid and returns parsed URL
 func ValidateURL(rawURL string) (*url.URL, error) {
 	if rawURL == "" {
 		return nil, fmt.Errorf("URL cannot be empty")
+	}
+
+	// Check for invalid scheme patterns
+	if strings.HasPrefix(rawURL, "://") {
+		return nil, fmt.Errorf("invalid URL: missing scheme")
 	}
 
 	// Add scheme if missing

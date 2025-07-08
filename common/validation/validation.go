@@ -101,14 +101,45 @@ func isValidEmail(email string) bool {
 		return false
 	}
 
+	// Check for spaces
+	if strings.Contains(email, " ") {
+		return false
+	}
+
 	parts := strings.Split(email, "@")
 	if len(parts) != 2 {
 		return false
 	}
 
-	if len(parts[0]) == 0 || len(parts[1]) == 0 {
+	localPart := parts[0]
+	domain := parts[1]
+
+	if len(localPart) == 0 || len(domain) == 0 {
 		return false
 	}
 
-	return strings.Contains(parts[1], ".")
+	// Domain must contain at least one dot and not start/end with dot
+	if !strings.Contains(domain, ".") {
+		return false
+	}
+
+	// Domain cannot start or end with dot
+	if strings.HasPrefix(domain, ".") || strings.HasSuffix(domain, ".") {
+		return false
+	}
+
+	// Domain cannot have consecutive dots
+	if strings.Contains(domain, "..") {
+		return false
+	}
+
+	// Domain parts cannot be empty
+	domainParts := strings.Split(domain, ".")
+	for _, part := range domainParts {
+		if len(part) == 0 {
+			return false
+		}
+	}
+
+	return true
 }

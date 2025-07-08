@@ -3,8 +3,8 @@ package types
 // Message represents an email message with builder pattern
 type Message struct {
 	To          []string          `json:"to"`
-	CC          []string          `json:"cc"`
-	BCC         []string          `json:"bcc"`
+	CC          []string          `json:"cc,omitempty"`
+	BCC         []string          `json:"bcc,omitempty"`
 	From        string            `json:"from"`
 	Sender      string            `json:"sender,omitempty"`
 	Subject     string            `json:"subject"`
